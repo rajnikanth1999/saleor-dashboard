@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+triggers {
+        pollSCM('* * * * *')
+    }
+    stages {
+        stage('trigger') {
+            steps {
+                git branch: 'main', url: 'https://github.com/rajnikanth1999/saleor-dashboard.git'
+            }
+        }
+        stage('build') {
+            steps {
+                sh 'docker image build -t docker push praveenrajnikanth/workshop:dashboard .'
+            }
+        }
+        stage('push') {
+            steps {
+                sh 'docker image push docker push praveenrajnikanth/workshop:dashboard'
+            }
+        }
+    }
+}
