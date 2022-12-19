@@ -19,5 +19,10 @@ triggers {
                 sh 'docker image push praveenrajnikanth/workshop:dashboard'
             }
         }
+        stage('container') {
+            steps {
+                sh 'docker container run -d -P praveenrajnikanth/workshop:dashboard'
+            }
+        }
     }
 }
